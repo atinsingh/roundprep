@@ -7,6 +7,7 @@
 /**
  * @type {import('gatsby').GatsbyConfig}
  */
+const path = require('path')
 module.exports = {
   siteMetadata: {
     title: `Gatsby Starter Blog`,
@@ -21,6 +22,8 @@ module.exports = {
     },
   },
   plugins: [
+    `gatsby-plugin-postcss`,
+    `gatsby-plugin-dark-mode`,
     `gatsby-plugin-image`,
     {
       resolve: `gatsby-source-filesystem`,
@@ -43,7 +46,7 @@ module.exports = {
           {
             resolve: `gatsby-remark-images`,
             options: {
-              maxWidth: 630,
+              maxWidth: 830,
             },
           },
           {
@@ -120,6 +123,23 @@ module.exports = {
         display: `minimal-ui`,
         icon: `src/images/gatsby-icon.png`, // This path is relative to the root of the site.
       },
+    },
+    {
+      resolve: `gatsby-plugin-alias-imports`,
+      options: {
+        alias: {
+          "@src": "src",
+          "@components": path.resolve(__dirname, 'src/components'),
+          "@layouts": path.resolve(__dirname, 'src/layouts'),
+          "@pages": path.resolve(__dirname, 'src/pages'),
+          "@sass": "src/sass",
+          "@templates": path.resolve(__dirname, 'src/templates'),
+          "@posts": "content/posts",
+        },
+        extensions: [
+          "js","jsx",
+        ],
+      }
     },
   ],
 }
